@@ -1,12 +1,10 @@
 package com.example.fitx
 
-import android.net.Uri
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
@@ -15,46 +13,18 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Ensure your XML file is named 'activity_home.xml'
-        setContentView(R.layout.dashboard)
+        setContentView(R.layout.dashboard) // Ensure XML is named 'dashboard.xml'
 
-        setupCharacterVideo()
+        setupCharacterImage()
         setupDashboardMetrics()
         setupHeaderInteractions()
         setupBottomNavigation()
     }
 
-    private fun setupCharacterVideo() {
-        val videoView = findViewById<VideoView>(R.id.character_video)
-
-        // NOTE: This assumes you have a video file named 'character_idle_anim' in 'res/raw/'
-        // If you don't have a video yet, this block is safe to keep but won't play anything
-        // until the resource exists.
-        try {
-            // Construct the path to the raw resource
-            // resourceId would normally be R.raw.character_idle_anim
-            // using a placeholder ID or checking existence logic is recommended here
-            val resourceId = resources.getIdentifier("character_idle_anim", "raw", packageName)
-
-            if (resourceId != 0) {
-                val uri = Uri.parse("android.resource://$packageName/$resourceId")
-                videoView.setVideoURI(uri)
-
-                // Loop the video for the character animation effect
-                videoView.setOnPreparedListener { mediaPlayer ->
-                    mediaPlayer.isLooping = true
-                    // Ensure the video scales correctly
-                    mediaPlayer.setVideoScalingMode(android.media.MediaPlayer.VIDEO_SCALING_MODE_SCALE_TO_FIT)
-                    // Make background transparent if needed once video starts
-                    videoView.background = null
-                }
-
-                videoView.start()
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            // Fallback: The XML 'android:background' will show the static image
-        }
+    private fun setupCharacterImage() {
+        val characterImageView = findViewById<ImageView>(R.id.character_video)
+        // Ensure you have your fox image in 'res/drawable'
+        characterImageView.setImageResource(R.drawable.male_character)
     }
 
     private fun setupDashboardMetrics() {
@@ -70,7 +40,7 @@ class HomeActivity : AppCompatActivity() {
         // 4. Water Intake Card
         findViewById<TextView>(R.id.water_value).text = "1.5 / 2.5 L"
 
-        // Optional: Add click listeners to cards for detailed views
+        // Interaction Example
         findViewById<MaterialCardView>(R.id.steps_card).setOnClickListener {
             Toast.makeText(this, "Opening Steps Details...", Toast.LENGTH_SHORT).show()
         }
@@ -89,26 +59,35 @@ class HomeActivity : AppCompatActivity() {
     private fun setupBottomNavigation() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
 
+        // Set the "Home" item as currently selected
+        bottomNav.selectedItemId = R.id.navigation_home
+
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                // Assuming ids in your 'bottom_nav_menu.xml' are like below:
-                // R.id.nav_home, R.id.nav_workout, R.id.nav_stats, R.id.nav_profile
+                // 1. HOME (Already here)
+                R.id.navigation_home -> true
 
-                // Replace these IDs with your actual menu IDs
-                resources.getIdentifier("nav_home", "id", packageName) -> {
-                    // Already on Home
+                // 2. TRAINING
+                R.id.navigation_training -> {
+                    val intent = Intent(this, TrainingActivity::class.java)
+                    startActivity(intent)
+                    overridePendingTransition(0, 0)
                     true
                 }
-                resources.getIdentifier("nav_workout", "id", packageName) -> {
-                    Toast.makeText(this, "Workouts", Toast.LENGTH_SHORT).show()
+
+                // 3. COMMUNITY
+                R.id.navigation_community -> {
+                    val intent = Intent(this, SocialActivity::class.java)
+                    startActivity(intent)
+                    overridePendingTransition(0, 0)
                     true
                 }
-                resources.getIdentifier("nav_stats", "id", packageName) -> {
-                    Toast.makeText(this, "Statistics", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                resources.getIdentifier("nav_profile", "id", packageName) -> {
-                    Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
+
+                // 4. PROFILE (UPDATED: Now opens ProfileActivity)
+                R.id.navigation_profile -> {
+                    val intent = Intent(this, ProfileActivity::class.java)
+                    startActivity(intent)
+                    overridePendingTransition(0, 0)
                     true
                 }
                 else -> false

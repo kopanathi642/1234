@@ -1,7 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.google.gms.google.services)
+
+    // CHANGED: Use 'id' instead of 'alias' to prevent "Unresolved Reference" errors
+    id("com.google.gms.google-services")
+    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
 android {
@@ -35,31 +38,38 @@ android {
         jvmTarget = "11"
     }
 
-    // ADD THIS BLOCK to enable View Binding
+    // View Binding enabled
     buildFeatures {
         viewBinding = true
     }
 }
 
 dependencies {
-    // Default dependencies
+    // --- STANDARD LIBRARIES (Keep these as 'libs' if they were default) ---
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.firebase.firestore)
+
+    // --- FIREBASE SETUP ---
+    // 1. BoM (Controls versions automatically)
+    implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
+
+    // 2. Auth & Google Sign In (For Login)
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.android.gms:play-services-auth:21.0.0")
+
+    // 3. Firestore (Database) - CHANGED to text to avoid 'libs' error
+    implementation("com.google.firebase:firebase-firestore")
+
+    // --- DASHBOARD EXTRAS ---
+    implementation("com.airbnb.android:lottie:6.3.0")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation(libs.play.services.maps)
+
+    // --- TESTING ---
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    // 🔹 Extra libraries for your dashboard
-    // Lottie for animated character
-    implementation("com.airbnb.android:lottie:6.3.0")
-
-    // MPAndroidChart for workout graph
-    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
-
-    // Material Bottom Navigation (newest version)
-    implementation("com.google.android.material:material:1.12.0")
 }

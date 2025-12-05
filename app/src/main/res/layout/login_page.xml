@@ -132,13 +132,16 @@
 
     <!-- Sign in with Google -->
     <LinearLayout
+        android:id="@+id/btnGoogleSignIn"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="@drawable/rounded_bg_gray"
         android:layout_marginTop="15dp"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:clickable="true"
+        android:focusable="true">
 
         <ImageView
             android:layout_width="24dp"

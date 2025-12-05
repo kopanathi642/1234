@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -32,21 +31,22 @@
                     android:src="@drawable/home_background"
                     tools:ignore="ContentDescription" />
 
-                <VideoView
+                <ImageView
                     android:id="@+id/character_video"
                     android:layout_width="250dp"
                     android:layout_height="350dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="120dp"
                     android:layout_marginBottom="40dp"
-                    android:background="@drawable/male_character"
-                    android:elevation="8dp" />
+                    android:elevation="8dp"
+                    tools:src="@drawable/male_character"
+                    tools:ignore="ContentDescription" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="16dp"
                     android:paddingStart="16dp"
+                    android:paddingTop="16dp"
                     android:paddingEnd="16dp">
 
                     <ImageView
@@ -62,13 +62,13 @@
 
                     <ImageView
                         android:id="@+id/streak_icon"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:padding="10dp"
+                        android:layout_marginEnd="16dp"
+                        android:scaleType="fitXY"
                         android:src="@drawable/ic_streak"
-                        app:tint="@android:color/white"
                         tools:ignore="ContentDescription" />
                 </RelativeLayout>
             </FrameLayout>
@@ -112,7 +112,6 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <!-- Note: android:layout_columnWeight requires API 21+ -->
                 <GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -120,7 +119,6 @@
                     android:columnOrderPreserved="false"
                     android:useDefaultMargins="true">
 
-                    <!-- 1. STEPS CARD (Added for steps_value) -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/steps_card"
                         android:layout_width="0dp"
@@ -146,7 +144,6 @@
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
 
-                            <!-- ID for Kotlin: steps_value -->
                             <TextView
                                 android:id="@+id/steps_value"
                                 android:layout_width="wrap_content"
@@ -158,7 +155,6 @@
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- 2. CALORIES CARD (Added for calories_value) -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/calories_card"
                         android:layout_width="0dp"
@@ -184,7 +180,6 @@
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
 
-                            <!-- ID for Kotlin: calories_value -->
                             <TextView
                                 android:id="@+id/calories_value"
                                 android:layout_width="wrap_content"
@@ -196,7 +191,6 @@
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- 3. Minutes Card (Existing) -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/minutes_card"
                         android:layout_width="0dp"
@@ -233,7 +227,6 @@
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- 4. Water Card (Existing) -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/water_card"
                         android:layout_width="0dp"

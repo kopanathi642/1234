@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "601910833784",
+    "project_id": "fit-x-9ffdb",
+    "storage_bucket": "fit-x-9ffdb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:601910833784:android:843a7630617202ef55b38d",
+        "android_client_info": {
+          "package_name": "com.example.fitx"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM7VXbXp3aBakGdxuvV4ernpZIsik2-NQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

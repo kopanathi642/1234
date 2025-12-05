@@ -1,8 +1,20 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Base.Theme.FitX" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Customize -->
+        <item name="colorPrimary">#B4F656</item> <item name="colorPrimaryVariant">#3700B3</item>
+        <item name="colorOnPrimary">#000000</item>
     </style>
 
     <style name="Theme.FitX" parent="Base.Theme.FitX"/>
+
+    <style name="RoundedImageStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <style name="CircleImageStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>
